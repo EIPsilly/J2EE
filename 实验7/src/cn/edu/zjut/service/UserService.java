@@ -41,12 +41,17 @@ public class UserService {
         request = (Map) ctx.get("request");
         CustomerDao c_dao = new CustomerDao();
         loginUser = (Customer)c_dao.findById(loginUser.getCustomerId());
-//        address.setCustomer(loginUser);
-        loginUser.getAddresses().add(address);
+        if (loginUser.getAddress() != null){
+            request.put("loginUser",loginUser);
+            request.put("tip","已有地址！");
+            return false;
+        }
+        address.setCustomer(loginUser);
+        loginUser.setAddress(address);
         Transaction tran = null;
         try{
             tran = c_dao.getSession().beginTransaction();
-            c_dao.update(loginUser);
+            c_dao.save(loginUser);
             tran.commit();
             request.put("loginUser",loginUser);
             request.put("tip","地址添加成功！");
@@ -59,25 +64,24 @@ public class UserService {
         }
     }
 
-    public boolean delAddr(Customer loginUser,Address address){
+    public boolean delAddr(Customer loginUser){
         ActionContext ctx = ActionContext.getContext();
         request = (Map) ctx.get("request");
         CustomerDao c_dao = new CustomerDao();
         loginUser = (Customer)c_dao.findById(loginUser.getCustomerId());
+        if (loginUser.getAddress() == null){
+            request.put("loginUser",loginUser);
+            request.put("tip","无地址！");
+            return false;
+        }
+        Address address = loginUser.getAddress();
         AddressDao a_dao = new AddressDao();
-        address = (Address)a_dao.findById(address.getAddressId());
-        loginUser.getAddresses().remove(address);
-        address.getCustomers().remove(loginUser);
+        loginUser.setAddress(null);
         Transaction tran = null;
         try{
-            tran = c_dao.getSession().beginTransaction();
-            c_dao.update(loginUser);
-            tran.commit();
-
             tran = a_dao.getSession().beginTransaction();
-            a_dao.update(address);
+            a_dao.delete(address);
             tran.commit();
-
             request.put("loginUser",loginUser);
             request.put("tip","地址删除成功！");
             return true;

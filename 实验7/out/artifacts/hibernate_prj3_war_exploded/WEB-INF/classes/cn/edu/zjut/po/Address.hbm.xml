@@ -26,7 +26,7 @@
 <!--</hibernate-mapping>-->
 
 <hibernate-mapping>
-    <class name="cn.edu.zjut.po.Address" table="address2" catalog = "hibernatedb">
+    <class name="cn.edu.zjut.po.Address" table="address" catalog = "hibernatedb">
         <id name="addressId" type="int">
             <column name="addressID"/>
             <generator class="increment"/>
@@ -43,9 +43,12 @@
         <property name="type" type="string">
             <column name="type" length="20"/>
         </property>
-        <set name = "customers" table="cust_addr" cascade="all" inverse="false">
-            <key column="addr_id"/>
-            <many-to-many column="cust_id" class="cn.edu.zjut.po.Customer"/>
-        </set>
+<!--        <set name = "customers" table="cust_addr" cascade="all" inverse="false">-->
+<!--            <key column="addr_id"/>-->
+<!--            <many-to-many column="cust_id" class="cn.edu.zjut.po.Customer"/>-->
+<!--        </set>-->
+        <many-to-one name="customer" class="cn.edu.zjut.po.Customer" fetch="select" unique="true">
+            <column name="cust_id"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

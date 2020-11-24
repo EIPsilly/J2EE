@@ -14,7 +14,7 @@ public class Customer {
     private String sexStr;
     private Date birthday;
     private String email;
-    private Set addresses = new HashSet(0);
+    private Address address;
 
     public Customer() {
     }
@@ -91,11 +91,11 @@ public class Customer {
         this.email = email;
     }
 
-    public Set getAddresses() {
-        return addresses;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddresses(Set addresses) {
-        this.addresses = addresses;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

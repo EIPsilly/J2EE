@@ -38,7 +38,7 @@ public class UserAction {
 
     public String delAddr(){
         UserService userServ = new UserService();
-        if (userServ.delAddr(loginUser,address)) return "success";
+        if (userServ.delAddr(loginUser)) return "success";
         else return "fail";
     }
 

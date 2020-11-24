@@ -9,8 +9,7 @@ public class Address {
     private String zipcode;
     private String phone;
     private String type;
-//    private Customer customer;
-    private Set customers = new HashSet(0);
+    private Customer customer;
 
     public Address() {
     }
@@ -55,19 +54,12 @@ public class Address {
         this.type = type;
     }
 
-//    public Customer getCustomer() {
-//        return customer;
-//    }
-//
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
-
-    public Set getCustomers() {
-        return customers;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(Set customers) {
-        this.customers = customers;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
+
 }

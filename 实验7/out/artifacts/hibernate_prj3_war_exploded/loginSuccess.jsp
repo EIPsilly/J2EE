@@ -35,35 +35,32 @@
         <td>邮箱：</td>
         <td><s:property value="#request.loginUser.email"/></td>
     </tr>
-    <s:iterator value="#request.loginUser.addresses" status="st">
+    <s:if test="#request.loginUser.address">
         <s:form action="UserdelAddr" method="POST">
-        <s:hidden name="loginUser.customerId" value="%{#request.loginUser.customerId}"/>
-        <s:hidden name="address.addressId" value="%{addressId}"/>
-            <tr>
-                <td>地址<s:property value="#st.count"/>：</td>
-            <tr>
+            <s:hidden name="loginUser.customerId" value="%{#request.loginUser.customerId}"/>
             <tr>
                 <td>详细地址：</td>
-                <td><s:property value="detail"/></td>
+                <td><s:property value="#request.loginUser.address.detail"/></td>
             <tr>
             <tr>
                 <td>邮政编码：</td>
-                <td><s:property value="zipcode"/></td>
+                <td><s:property value="#request.loginUser.address.zipcode"/></td>
             <tr>
             <tr>
                 <td>电话号码：</td>
-                <td><s:property value="phone"/></td>
+                <td><s:property value="#request.loginUser.address.phone"/></td>
             <tr>
             <tr>
                 <td>地址类型：</td>
-                <td><s:property value="type"/></td>
+                <td><s:property value="#request.loginUser.address.type"/></td>
             <tr>
             <tr>
                 <td><s:submit value="删除"/></td>
             </tr>
         </s:form>
-    </s:iterator>
+    </s:if>
 </table>
+<s:else>
 添加新地址：
     <s:form action="UseraddAddr" method="post">
         <s:hidden name="loginUser.customerId" value="%{#request.loginUser.customerId}"/>
@@ -73,5 +70,6 @@
         <s:textfield name="address.type" label="地址类型（office,home,etc.）"/>
         <s:submit value="添加"/>
     </s:form>
+</s:else>
 </body>
 </html>

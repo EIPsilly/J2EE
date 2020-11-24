@@ -32,4 +32,15 @@ public class AddressDao extends BaseHibernateDao {
         }
     }
 
+    public void delete(Address instance){
+        log.debug("updating Address instance");
+        try{
+            getSession().delete(instance);
+            log.debug("update successful");
+        } catch (RuntimeException re){
+            log.error("update failed",re);
+            throw re;
+        }
+    }
+
 }
