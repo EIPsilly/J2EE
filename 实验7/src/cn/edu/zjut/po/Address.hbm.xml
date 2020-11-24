@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--<hibernate-mapping>-->
+<!--    <class name="cn.edu.zjut.po.Address" table="address" catalog = "hibernatedb">-->
+<!--        <id name="addressId" type="int">-->
+<!--            <column name="addressID"/>-->
+<!--            <generator class="increment"/>-->
+<!--        </id>-->
+<!--        <property name="detail" type="string">-->
+<!--            <column name="detail" length="200"/>-->
+<!--        </property>-->
+<!--        <property name="zipcode" type="string">-->
+<!--            <column name="zipcode" length="10"/>-->
+<!--        </property>-->
+<!--        <property name="phone" type="string">-->
+<!--            <column name="phone" length="20"/>-->
+<!--        </property>-->
+<!--        <property name="type" type="string">-->
+<!--            <column name="type" length="20"/>-->
+<!--        </property>-->
+<!--        <many-to-one name="customer" class="cn.edu.zjut.po.Customer" fetch="select" not-null="true">-->
+<!--            <column name="cust_id"/>-->
+<!--        </many-to-one>-->
+<!--    </class>-->
+<!--</hibernate-mapping>-->
+
+<hibernate-mapping>
+    <class name="cn.edu.zjut.po.Address" table="address2" catalog = "hibernatedb">
+        <id name="addressId" type="int">
+            <column name="addressID"/>
+            <generator class="increment"/>
+        </id>
+        <property name="detail" type="string">
+            <column name="detail" length="200"/>
+        </property>
+        <property name="zipcode" type="string">
+            <column name="zipcode" length="10"/>
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="20"/>
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="20"/>
+        </property>
+        <set name = "customers" table="cust_addr" cascade="all" inverse="false">
+            <key column="addr_id"/>
+            <many-to-many column="cust_id" class="cn.edu.zjut.po.Customer"/>
+        </set>
+    </class>
+</hibernate-mapping>
