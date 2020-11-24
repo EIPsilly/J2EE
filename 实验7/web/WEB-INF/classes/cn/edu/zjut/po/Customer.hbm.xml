@@ -31,7 +31,7 @@
 <!--            <key column="cust_id"/>-->
 <!--            <many-to-many column="addr_id" class="cn.edu.zjut.po.Address"/>-->
 <!--        </set>-->
-        <one-to-one name="address" property-ref="customer" class="cn.edu.zjut.po.Address" cascade="all">
+        <one-to-one name="address" class="cn.edu.zjut.po.Address" cascade="all">
         </one-to-one>
     </class>
 </hibernate-mapping>

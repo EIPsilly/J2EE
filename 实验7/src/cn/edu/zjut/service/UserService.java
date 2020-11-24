@@ -75,12 +75,12 @@ public class UserService {
             return false;
         }
         Address address = loginUser.getAddress();
-        AddressDao a_dao = new AddressDao();
         loginUser.setAddress(null);
         Transaction tran = null;
         try{
-            tran = a_dao.getSession().beginTransaction();
-            a_dao.delete(address);
+            tran = c_dao.getSession().beginTransaction();
+            new AddressDao().delete(address);
+            c_dao.save(loginUser);
             tran.commit();
             request.put("loginUser",loginUser);
             request.put("tip","地址删除成功！");
