@@ -1,5 +1,6 @@
 package com.mybatis.test;
 
+import com.dao.UserDao;
 import com.mybatis.po.MyUser;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -25,9 +26,10 @@ public class MyBatisTest {
 //            addmu.setUsex("男");
 //            ss.insert("com.mybatis.mapper.UserMapper.addUser",addmu);
             Map<String,Object> map = new HashMap<>();
-            map.put("u_name","a");
+            map.put("u_name","c");
             map.put("u_sex","男");
-            List<MyUser> list = ss.selectList("com.mybatis.mapper.UserMapper.selectAllUser",map);
+            UserDao userDao = ss.getMapper(UserDao.class);
+            List<MyUser> list = userDao.selectAllUser(map);
             for (MyUser myUser:list){
                 System.out.println("编号:"+myUser.getUid()+"\n姓名:"+myUser.getUname()+"\n性别:"+myUser.getUsex());
             }
